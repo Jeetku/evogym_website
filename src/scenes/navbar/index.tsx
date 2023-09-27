@@ -10,17 +10,19 @@ import ActionButton from "@/shared/ActionButton";
 
 type Props={
     selectedPage: SelectedPage,
+    isTopOfPage:boolean,
     setSelectedPage: (value: SelectedPage) => void
 };
 
 
-const Navbar = ({selectedPage,setSelectedPage}:Props) => {
+const Navbar = ({selectedPage,setSelectedPage,isTopOfPage}:Props) => {
     const flexBetween="flex items-center justify-between"
     const isAboveMediumScreen=useMediaQuery("(min-width:1060px)")
     const [isMenuToggled,setIsMenuToggled]=useState<boolean>(true)
+    const navbarBackground = isTopOfPage ? "" : "bg-primary-100 drop-shadow";
   return (
     <nav>
-        <div className={`${flexBetween} fixed top-0 py-6 z-30 w-full`}>
+        <div className={`${navbarBackground} ${flexBetween} fixed top-0 py-6 z-30 w-full`}>
         <div className={`${flexBetween} mx-auto w-5/6`}>
             <div className={`${flexBetween} gap-16 w-full`}>
                 <img src={logo} alt="Logo" />
@@ -39,12 +41,12 @@ const Navbar = ({selectedPage,setSelectedPage}:Props) => {
                         <p>Sign In</p>
                         <ActionButton setSelectedPage={setSelectedPage}>Become a Member</ActionButton>
                     </div>
-                </div>
+           </div>
                  :(
               
-                  <button className="rounded-full bg-secondary-500 p-2" onClick={()=>setIsMenuToggled(!isMenuToggled)}>
-                  <Bars3Icon className="h-6 w-6 text-white cursor-pointer" />
-                  </button>
+           <button className="rounded-full bg-secondary-500 p-2" onClick={()=>setIsMenuToggled(!isMenuToggled)}>
+           <Bars3Icon className="h-6 w-6 text-white cursor-pointer" />
+           </button>
           
               )}
             </div>
